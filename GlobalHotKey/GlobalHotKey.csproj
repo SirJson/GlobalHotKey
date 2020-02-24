@@ -9,11 +9,12 @@
     <PackageId>GlobalHotKeyCore</PackageId>
     <Version>1.2.0</Version>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <Description>Provides an easy way to setup system-wide hot keys on a and react on their events. This is a modified version of GlobalHotKey for .NET Core compability.</Description>
-    <PackageProjectUrl>https://github.com/SirJson/GlobalHotKey</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/SirJson/GlobalHotKey</RepositoryUrl>
+    <Description>Provides an easy way to setup system-wide hot keys on a and react on their events. This is a modified version of GlobalHotKey for .NET Core.</Description>
+    <PackageProjectUrl>https://github.com/SirJson/GlobalHotKeyCore</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/SirJson/GlobalHotKeyCore</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Authors>GlobalHotKey, SirJson</Authors>
   </PropertyGroup>
 
   <ItemGroup>

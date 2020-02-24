@@ -2,8 +2,6 @@
 Provides an easy way to setup system-wide hot keys and react on their events. Works well in both, WPF and WebForms applications without any need to use Windows API.
 This fork added .NET Core 3.1+ support.
 
-[![NuGet version](https://badge.fury.io/nu/GlobalHotKey.svg)](https://badge.fury.io/nu/GlobalHotKey)
-
 # Installation
 
 Th package is available through the NuGet by running the command
