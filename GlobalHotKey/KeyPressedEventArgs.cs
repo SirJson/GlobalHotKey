@@ -11,10 +11,7 @@ namespace GlobalHotKey
         /// Initializes a new instance of the <see cref="KeyPressedEventArgs"/> class.
         /// </summary>
         /// <param name="hotKey">The hot key.</param>
-        public KeyPressedEventArgs(HotKey hotKey)
-        {
-            HotKey = hotKey;
-        }
+        public KeyPressedEventArgs(HotKey hotKey) => this.HotKey = hotKey;
 
         /// <summary>
         /// Gets the hot key.

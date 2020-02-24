@@ -14,8 +14,8 @@ namespace GlobalHotKey
         /// <param name="modifiers">The key modifiers.</param>
         public HotKey(Key key, ModifierKeys modifiers)
         {
-            Key = key;
-            Modifiers = modifiers;
+            this.Key = key;
+            this.Modifiers = modifiers;
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace GlobalHotKey
         /// </returns>
         public bool Equals(HotKey other)
         {
-            if (ReferenceEquals(null, other))
+            if (other is null)
                 return false;
 
             if (ReferenceEquals(this, other))
@@ -70,7 +70,7 @@ namespace GlobalHotKey
         /// </returns>
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(null, obj))
+            if (obj is null)
                 return false;
 
             if (ReferenceEquals(this, obj))

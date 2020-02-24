@@ -31,9 +31,9 @@
             this.btnRegister = new System.Windows.Forms.Button();
             this.btnUnregister = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
+            //
             // btnRegister
-            // 
+            //
             this.btnRegister.Location = new System.Drawing.Point(12, 12);
             this.btnRegister.Name = "btnRegister";
             this.btnRegister.Size = new System.Drawing.Size(143, 23);
@@ -41,9 +41,9 @@
             this.btnRegister.Text = "Register Ctrl+Alt+F5";
             this.btnRegister.UseVisualStyleBackColor = true;
             this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
-            // 
+            //
             // btnUnregister
-            // 
+            //
             this.btnUnregister.Location = new System.Drawing.Point(12, 41);
             this.btnUnregister.Name = "btnUnregister";
             this.btnUnregister.Size = new System.Drawing.Size(143, 23);
@@ -51,9 +51,9 @@
             this.btnUnregister.Text = "Unregister";
             this.btnUnregister.UseVisualStyleBackColor = true;
             this.btnUnregister.Click += new System.EventHandler(this.btnUnregister_Click);
-            // 
+            //
             // MainForm
-            // 
+            //
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 262);
@@ -72,4 +72,3 @@
         private System.Windows.Forms.Button btnUnregister;
     }
 }
-

@@ -28,10 +28,10 @@ namespace GlobalHotKey
         /// </summary>
         public HotKeyManager()
         {
-            _windowHandleSource = new HwndSource(new HwndSourceParameters());
-            _windowHandleSource.AddHook(messagesHandler);
+            this._windowHandleSource = new HwndSource(new HwndSourceParameters());
+            this._windowHandleSource.AddHook(MessagesHandler);
 
-            _registered = new Dictionary<HotKey, int>();
+            this._registered = new Dictionary<HotKey, int>();
         }
 
         /// <summary>
@@ -54,15 +54,15 @@ namespace GlobalHotKey
         public void Register(HotKey hotKey)
         {
             // Check if specified hot key is already registered.
-            if (_registered.ContainsKey(hotKey))
+            if (this._registered.ContainsKey(hotKey))
                 throw new ArgumentException("The specified hot key is already registered.");
 
             // Register new hot key.
-            var id = getFreeKeyId();
+            var id = GetFreeKeyId();
             if (!WinApi.RegisterHotKey(_windowHandleSource.Handle, id, hotKey.Key, hotKey.Modifiers))
                 throw new Win32Exception(Marshal.GetLastWin32Error(), "Can't register the hot key.");
 
-            _registered.Add(hotKey, id);
+            this._registered.Add(hotKey, id);
         }
 
         /// <summary>
@@ -82,11 +82,10 @@ namespace GlobalHotKey
         /// <param name="hotKey">The registered hot key.</param>
         public void Unregister(HotKey hotKey)
         {
-            int id;
-            if (_registered.TryGetValue(hotKey, out id))
+            if (this._registered.TryGetValue(hotKey, out var id))
             {
-                WinApi.UnregisterHotKey(_windowHandleSource.Handle, id);
-                _registered.Remove(hotKey);
+                _ = WinApi.UnregisterHotKey(_windowHandleSource.Handle, id);
+                _ = this._registered.Remove(hotKey);
             }
         }
 
@@ -96,31 +95,28 @@ namespace GlobalHotKey
         public void Dispose()
         {
             // Unregister hot keys.
-            foreach (var hotKey in _registered)
+            foreach (var hotKey in this._registered)
             {
-                WinApi.UnregisterHotKey(_windowHandleSource.Handle, hotKey.Value);
+                _ = WinApi.UnregisterHotKey(this._windowHandleSource.Handle, hotKey.Value);
             }
 
-            _windowHandleSource.RemoveHook(messagesHandler);
+            _windowHandleSource.RemoveHook(MessagesHandler);
             _windowHandleSource.Dispose();
         }
 
-        private int getFreeKeyId()
-        {
-            return _registered.Any() ? _registered.Values.Max() + 1 : 0;
-        }
+        private int GetFreeKeyId() => this._registered.Any() ? this._registered.Values.Max() + 1 : 0;
 
-        private IntPtr messagesHandler(IntPtr handle, int message, IntPtr wParam, IntPtr lParam, ref bool handled)
+        private IntPtr MessagesHandler(IntPtr handle, int message, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
             if (message == WinApi.WmHotKey)
             {
                 // Extract key and modifiers from the message.
                 var key = KeyInterop.KeyFromVirtualKey(((int)lParam >> 16) & 0xFFFF);
                 var modifiers = (ModifierKeys)((int)lParam & 0xFFFF);
-                
+
                 var hotKey = new HotKey(key, modifiers);
-                onKeyPressed(new KeyPressedEventArgs(hotKey));
-                
+                OnKeyPressed(new KeyPressedEventArgs(hotKey));
+
                 handled = true;
                 return new IntPtr(1);
             }
@@ -128,11 +124,6 @@ namespace GlobalHotKey
             return IntPtr.Zero;
         }
 
-        private void onKeyPressed(KeyPressedEventArgs e)
-        {
-            var handler = KeyPressed;
-            if (handler != null)
-                handler(this, e);
-        }
+        private void OnKeyPressed(KeyPressedEventArgs e) => KeyPressed?.Invoke(this, e);
     }
 }
